@@ -6,6 +6,7 @@ angular.module('app.services', [])
     this.submitBeehive = function(beehive){
         MainService.saveBeehive(beehive);
         var deferred = $q.defer();  
+        angular.extend(beehive, {method:"createbeehive"});
         $http.post(API_URL, beehive)    
             .success(function(data) {
                 if (data.result === "success"){
@@ -26,6 +27,7 @@ angular.module('app.services', [])
     
    this.submitNsBeehive = function(beehive,index){
         var deferred = $q.defer();  
+        angular.extend(beehive, {method:"createbeehive"});
         $http.post(API_URL, beehive)    
             .success(function(data) {
                 if (data.result === "success"){
@@ -91,9 +93,27 @@ angular.module('app.services', [])
     };
 
     this.getBeehives = function(){
-        var data = window.localStorage.beehives ? JSON.parse(window.localStorage.beehives) : null;
-        return data;
+        var deferred = $q.defer();  
+        $http.post(API_URL, {method:"getbeehives"})    
+            .success(function(data) {
+                if (data.result === "success"){
+                    window.localStorage.beehives = JSON.stringify(data.data);
+                    deferred.resolve(data.data);
+                }
+                else{
+                    var offlineData = window.localStorage.beehives ? JSON.parse(window.localStorage.beehives) : null;
+                    deferred.resolve(offlineData);
+                }
+            })
+            .error(function(data,status) {
+                var offlineData = window.localStorage.beehives ? JSON.parse(window.localStorage.beehives) : null;
+                deferred.resolve(offlineData);
+            });
+
+        return deferred.promise;         
+
     }; 
+    
     
     this.getBeehive = function(index){
         var data = window.localStorage.beehives ? JSON.parse(window.localStorage.beehives) : null;
@@ -102,6 +122,58 @@ angular.module('app.services', [])
         }
         return data;
     }; 
+    
+    this.getTeamSites = function(){
+        var deferred = $q.defer();  
+        $http.post(API_URL, {method:"getteams"})    
+            .success(function(data) {
+                if (data.result === "success"){
+                    window.localStorage.teamsites = JSON.stringify(data.data);
+                    deferred.resolve(data.data);
+                }
+                else{
+                    var offlineData = window.localStorage.teamsites ? JSON.parse(window.localStorage.teamsites) : null;
+                    deferred.resolve(offlineData);
+                }
+            })
+            .error(function(data,status) {
+                var offlineData = window.localStorage.teamsites ? JSON.parse(window.localStorage.teamsites) : null;
+                deferred.resolve(offlineData);
+            });
+
+        return deferred.promise;         
+    }
+    this.getLastBeehiveEntries = function(teamName,siteName){
+        var deferred = $q.defer();
+
+        
+        MainService.getBeehives().then(function(data){
+            var lastBeehives = {
+                lastBeehive:{},
+                lastPpBeehive:{},
+                lastSsBeehive:{}
+            }            
+            for (var index in data.data){
+                var beehive = data.data[index];
+                if (beehive.teamName === teamName && beehive.siteName === siteName){
+                    lastBeehives.lastBeehive = beehive;
+                    if (beehive.feedPp){
+                        lastBeehives.lastPpBeehive = beehive;
+                    }
+                    if (beehive.feedSs){
+                        lastBeehives.lastSsBeehive = beehive;
+                    }
+                }
+                
+            } 
+            deferred.resolve(lastBeehives);
+        },function(){
+            deferred.reject();
+        });
+        
+        return deferred.promise; 
+
+    }    
     
     this.saveNotSubmittedBeehive = function(beehive){
         var beehives = MainService.getNotSubmittedBeehives();
@@ -125,3 +197,4 @@ angular.module('app.services', [])
    
     
 });
+

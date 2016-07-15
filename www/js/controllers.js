@@ -27,16 +27,86 @@ angular.module('app.controllers', [])
         daysSinceLast2FeedsPp2:0,
         daysSinceVisited:0,
         gearNeeded:"",
-        submittedDate:"",
-        submittedAt:""
+        submittedDate:""
     }
+    $scope.teamSites = [];
+    $scope.teamSitesSelect = {teams:[],sites:[]};
     
     $scope.blankBehive = angular.copy($scope.behive);
+    
+    $scope.lastBeehive = {};
+    MainService.getTeamSites().then(function(data){
+        $scope.teamSites = data;
+        for (var index in $scope.teamSites){
+            var teamSite = $scope.teamSites[index];
+            if ($scope.teamSitesSelect.teams.indexOf(teamSite["team"]) < 0){
+                $scope.teamSitesSelect.teams.push(teamSite["team"]);
+            }
+            if ($scope.teamSitesSelect.sites.indexOf(teamSite["site"]) < 0){
+                $scope.teamSitesSelect.sites.push(teamSite["site"]);
+            }            
+        }
+    });
+    
+    
+    $scope.checkQrCode = function(qrCode){
+        for (var index in $scope.teamSites){
+            var teamSite = $scope.teamSites[index];
+            if (teamSite.team === $scope.beehive.teamName && teamSite.site === $scope.beehive.siteName){
+                return teamSite.qrCode === qrCode;
+            }
+        }
+        return false;
+    }
     
     $scope.addAmount = function(amount,object, key){
         console.log(object[key]);
         object[key] +=amount;
     }
+    
+    $scope.setFieldDate = function(object,key){
+        var date = new Date();
+        var ampm = date.getUTCHours() < 12 ? "am" : "pm";
+        var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
+        object[key] = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getUTCHours() + ":" + min + " " + ampm;   
+    }
+    
+    $scope.selectOption = function(){
+        MainService.getLastBeehiveEntries($scope.beehive.teamName, $scope.beehive.siteName).then(function(data){
+            //3 object: 1 last beehive, 2 last Pp beehive, 3 last Ss beehive
+            var lastBeehive = data.lastBeehive;
+            var lastPpBeehive = data.lastPpBeehive;
+            var lastSsBeehive = data.lastSsBeehive;
+            
+            $scope.beehive.numberOfHives = lastBeehive.numberOfHives; 
+            $scope.beehive.daysSinceVisited = $scope.getDaysSince(new Date(lastBeehive.subbmittedDate));
+
+            $scope.beehive.daysSinceLast2FeedsPp1 = $scope.getDaysSince(new Date(lastPpBeehive.feedPpDate)); 
+            $scope.beehive.daysSinceLast2FeedsPp2 = $scope.beehive.daysSinceLast2FeedsPp1 + parseInt(lastPpBeehive.daysSinceLast2FeedsPp1);   
+            
+            $scope.beehive.daysSinceLast2FeedsSs1 = $scope.getDaysSince(new Date(lastSsBeehive.feedSsDate)); 
+            $scope.beehive.daysSinceLast2FeedsSs2 = $scope.beehive.daysSinceLast2FeedsSs1 + parseInt(lastSsBeehive.daysSinceLast2FeedsSs1);              
+            
+        },function(){
+            $scope.beehive.numberOfHives = 0;  
+            $scope.beehive.daysSinceVisited = 0
+            $scope.beehive.daysSinceLast2FeedsPp1 = 0;
+            $scope.beehive.daysSinceLast2FeedsPp2 = 0;
+            $scope.beehive.daysSinceLast2FeedsSs1 = 0;
+            $scope.beehive.daysSinceLast2FeedsSs2 = 0;
+        })
+    }
+    
+    $scope.$watch('beehive', function() {
+        $scope.beehive.totalNumberOfSupers = $scope.beehive.hivesWith1Super + ($scope.beehive.hivesWith2Supers*2) + ($scope.beehive.hivesWith3Supers*3) + ($scope.beehive.hivesWith4Supers*4);
+
+    }, true);
+    
+    $scope.getDaysSince = function(date){
+        var seconds = Math.floor((new Date() - date) / 1000);
+        return Math.floor(seconds / 86400);
+    }
+
     
     $scope.errorHandler = function(e) {
       var msg = '';
@@ -69,9 +139,9 @@ angular.module('app.controllers', [])
         //console.log(cordova.file.externalDataDirectory + 'log.txt');
 
         var date = (new Date).getTime();
-        $scope.checklist.filename = "checklist" + date + ".txt";
-        console.log($scope.checklist.filename);
-        fs.root.getFile("checklist" + date + ".txt", {create: true}, function(fileEntry) {
+        $scope.beehive.filename = "behive" + date + ".txt";
+        console.log($scope.beehive.filename);
+        fs.root.getFile("behive" + date + ".txt", {create: true}, function(fileEntry) {
             // Create a FileWriter object for our FileEntry (log.txt).
             fileEntry.createWriter(function(fileWriter) {
                 fileWriter.onwriteend = function(e) {
@@ -83,7 +153,7 @@ angular.module('app.controllers', [])
                 };
 
                 // Create a new Blob and write it to log.txt.
-                var blob = new Blob([JSON.stringify($scope.checklist)], {type: 'text/plain'});
+                var blob = new Blob([JSON.stringify($scope.beehive)], {type: 'text/plain'});
 
                 fileWriter.write(blob);
 
@@ -100,12 +170,8 @@ angular.module('app.controllers', [])
         $ionicLoading.show({
             template: 'Submitting data...'
         });      
-        
-        var date = new Date();
-        var ampm = date.getUTCHours() < 12 ? "am" : "pm";
-        var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
-        $scope.behive.submittedDate = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear();
-        $scope.behive.submittedAt =  date.getUTCHours() + ":" + min + " " + ampm;   
+
+        $scope.setFieldDate($scope.behive, "submittedDate");
         //window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
         window.webkitStorageInfo.requestQuota(window.PERSISTENT, 1024*1024, function(grantedBytes) {
           window.requestFileSystem(window.PERSISTENT, grantedBytes, $scope.onInitFs, $scope.errorHandler);
