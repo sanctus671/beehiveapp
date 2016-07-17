@@ -49,15 +49,24 @@ angular.module('app.controllers', [])
     });
     
     $scope.openScanQrCode = function(){
-        if (QRScanner){
-            QRScanner.prepare(function(status){
-                console.log(status);
-                if (status.authorized) {
-                    QRScanner.scan(function(data){
-                        console.log(data);
-                    });
-                }
-            });            
+        if (cordova.plugins && cordova.plugins.barcodeScanner){
+            cordova.plugins.barcodeScanner.scan(
+                  function (result) {
+                      alert("We got a barcode\n" +
+                            "Result: " + result.text + "\n" +
+                            "Format: " + result.format + "\n" +
+                            "Cancelled: " + result.cancelled);
+                  }, 
+                  function (error) {
+                      alert("Scanning failed: " + error);
+                  },
+                  {
+                      "preferFrontCamera" : false, // iOS and Android
+                      "showFlipCameraButton" : true, // iOS and Android
+                      "prompt" : "Place QR code inside the scan area", // supported on Android only
+                      "formats" : "QR_CODE", // default: all but PDF_417 and RSS_EXPANDED
+                  }
+               );          
         }
     }
     
