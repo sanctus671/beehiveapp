@@ -7,7 +7,7 @@
 <ion-view view-title="Behive Details">
   <ion-content>
       <ion-list>
-          <ion-item ng-repeat="(label, row) in beehive">
+          <ion-item ng-repeat="(label, row) in beehive" ng-if="label !== 'qrCode'">
               <strong>{{label}}:</strong> {{row}}
           </ion-item>
           

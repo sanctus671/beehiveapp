@@ -52,13 +52,37 @@ angular.module('app.controllers', [])
         if (cordova.plugins && cordova.plugins.barcodeScanner){
             cordova.plugins.barcodeScanner.scan(
                   function (result) {
-                      alert("We got a barcode\n" +
-                            "Result: " + result.text + "\n" +
-                            "Format: " + result.format + "\n" +
-                            "Cancelled: " + result.cancelled);
+                        if ($scope.checkQrCode(result.text)){
+                            $scope.beehive.qrCode = result.text;
+                            $ionicPopup.alert({
+                            title: 'Success',
+                            template: "Your location has been confirmed. You may now submit this data.",
+                            buttons:[
+                                {text: "OK",
+                                type:"button-energized"}
+                            ]
+                            });                             
+                        }
+                        else{
+                            $ionicPopup.alert({
+                            title: 'Error',
+                            template: "QR code is invalid. Please try again.",
+                            buttons:[
+                                {text: "OK",
+                                type:"button-energized"}
+                            ]
+                            });                             
+                        }
                   }, 
                   function (error) {
-                      alert("Scanning failed: " + error);
+                    $ionicPopup.alert({
+                    title: 'Error',
+                    template: "Scanning failed with error: " + error,
+                    buttons:[
+                        {text: "OK",
+                        type:"button-energized"}
+                    ]
+                    }); 
                   },
                   {
                       "preferFrontCamera" : false, // iOS and Android
