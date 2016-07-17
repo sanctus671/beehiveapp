@@ -48,6 +48,19 @@ angular.module('app.controllers', [])
         }
     });
     
+    $scope.openScanQrCode = function(){
+        if (QRScanner){
+            QRScanner.prepare(function(status){
+                console.log(status);
+                if (status.authorized) {
+                    QRScanner.scan(function(data){
+                        console.log(data);
+                    });
+                }
+            });            
+        }
+    }
+    
     
     $scope.checkQrCode = function(qrCode){
         for (var index in $scope.teamSites){
