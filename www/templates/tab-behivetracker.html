@@ -104,20 +104,8 @@
           <input min="0" type="number" name="totalNumberOfSupers" placeholder="Total number of supers" ng-model="beehive.totalNumberOfSupers">
         </label>  
         
-        <ion-checkbox class="checkbox-energized" ng-model="beehive.varroaIn" name="varroaIn" ng-change="setFieldDate(beehive, 'varroaInDate')">Varroa in</ion-checkbox>  
-        <ion-checkbox class="checkbox-energized"  ng-model="beehive.feedSs" name="feedSs" ng-change="setFieldDate(beehive, 'feedSsDate')">Feed S/S</ion-checkbox>    
-            
-        <label class="item item-input">
-          <span class="input-label">Days since last feed</span>
-          <input min="0" type="number" name="daysSinceLast2FeedsPp1" placeholder="Days since last 2 feeds: first" ng-model="beehive.daysSinceLast2FeedsPp1">
-        </label>  
-        <label class="item item-input">
-          <span class="input-label">Days since that feed</span>
-          <input min="0" type="number" name="daysSinceLast2FeedsPp2" placeholder="Days since last 2 feeds: second" ng-model="beehive.daysSinceLast2FeedsPp2">
-        </label>      
-        
-        <ion-checkbox class="checkbox-energized" ng-model="beehive.feedPp" name="feedPp" ng-change="setFieldDate(beehive.feedPp, beehive, 'feedPpDate')">Feed P/P</ion-checkbox> 
-            
+        <ion-checkbox class="checkbox-energized" ng-model="beehive.varroaIn" name="varroaIn" ng-change="setFieldDate(beehive.varroaIn, beehive, 'varroaInDate')">Varroa in</ion-checkbox>  
+        <ion-checkbox class="checkbox-energized"  ng-model="beehive.feedSs" name="feedSs" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">Feed S/S</ion-checkbox>    
         <label class="item item-input">
           <span class="input-label">Days since last feed</span>
           <input min="0" type="number" name="daysSinceLast2FeedsSs1" placeholder="Days since last 2 feeds: first" ng-model="beehive.daysSinceLast2FeedsSs1">
@@ -125,6 +113,18 @@
         <label class="item item-input">
           <span class="input-label">Days since that feed</span>
           <input min="0" type="number" name="daysSinceLast2FeedsSs2" placeholder="Days since last 2 feeds: second" ng-model="beehive.daysSinceLast2FeedsSs2">
+        </label>     
+        
+        <ion-checkbox class="checkbox-energized" ng-model="beehive.feedPp" name="feedPp" ng-change="setFieldDate(beehive.feedPp, beehive, 'feedPpDate')">Feed P/P</ion-checkbox> 
+            
+             
+        <label class="item item-input">
+          <span class="input-label">Days since last feed</span>
+          <input min="0" type="number" name="daysSinceLast2FeedsPp1" placeholder="Days since last 2 feeds: first" ng-model="beehive.daysSinceLast2FeedsPp1">
+        </label>  
+        <label class="item item-input">
+          <span class="input-label">Days since that feed</span>
+          <input min="0" type="number" name="daysSinceLast2FeedsPp2" placeholder="Days since last 2 feeds: second" ng-model="beehive.daysSinceLast2FeedsPp2">
         </label>  
         
         <label class="item item-input form-seperator">

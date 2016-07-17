@@ -252,7 +252,7 @@ angular.module('app.controllers', [])
             template: 'Submitting data...'
         });      
 
-        $scope.setFieldDate($scope.beehive, "submittedDate");
+        $scope.setFieldDate(true, $scope.beehive, "submittedDate");
         if (window.requestFileSystem || window.webkitRequestFileSystem){
             window.requestFileSystem  = window.requestFileSystem || window.webkitRequestFileSystem;
             window.webkitStorageInfo.requestQuota(window.PERSISTENT, 1024*1024, function(grantedBytes) {
