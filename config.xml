@@ -2,7 +2,7 @@
 <widget id="com.taylorhamling.beehiveapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
   <name>Beehive Tracker</name>
   <description>
-       Beehive app for tracking behives
+       Beehive app for tracking beehives
     </description>
   <author email="taylor@taylorhamling.com" href="http://www.taylorhamling.com">
       Taylor Hamling
@@ -29,7 +29,7 @@
 
 	<gap:plugin name="ionic-plugin-keyboard" source="npm"/>	
   
-  <gap:plugin name="cordova-plugin-qrscanner" source="npm"/>
+  <gap:plugin spec="https://github.com/bitpay/cordova-plugin-qrscanner" source="git"/>
   
     <icon gap:platform="android" gap:qualifier="ldpi" src="resources/icon/android/ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="resources/icon/android/mdpi.png" />
