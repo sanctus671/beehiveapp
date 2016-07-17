@@ -4,7 +4,7 @@ angular.module('app.services', [])
 .service('MainService', function ($http, $q, API_URL,$interval){
     var MainService = this;
     this.submitBeehive = function(beehive){
-        MainService.saveBeehive(beehive);
+        //MainService.saveBeehive(beehive);
         var deferred = $q.defer();  
         angular.extend(beehive, {method:"createbeehive"});
         $http.post(API_URL, beehive)    
@@ -83,6 +83,7 @@ angular.module('app.services', [])
     
     this.saveBeehive = function(beehive){
         var beehives = MainService.getBeehives();
+        console.log(beehives);
         if (beehives){
             beehives.push(beehive);
             window.localStorage.beehives = JSON.stringify(beehives);
@@ -115,8 +116,11 @@ angular.module('app.services', [])
     }; 
     
     
-    this.getBeehive = function(index){
+    this.getBeehive = function(index, notSubmitted){
         var data = window.localStorage.beehives ? JSON.parse(window.localStorage.beehives) : null;
+        if (notSubmitted){
+            var data = window.localStorage.nsbeehives ? JSON.parse(window.localStorage.nsbeehives) : null;   
+        }
         if (data){
             return data[index];
         }
@@ -125,7 +129,7 @@ angular.module('app.services', [])
     
     this.getTeamSites = function(){
         var deferred = $q.defer();  
-        $http.post(API_URL, {method:"getteams"})    
+        $http.post(API_URL, {method:"getteamsites"})    
             .success(function(data) {
                 if (data.result === "success"){
                     window.localStorage.teamsites = JSON.stringify(data.data);
@@ -148,19 +152,22 @@ angular.module('app.services', [])
 
         
         MainService.getBeehives().then(function(data){
+            if (data.length < 1){
+                deferred.reject();
+            }
             var lastBeehives = {
                 lastBeehive:{},
                 lastPpBeehive:{},
                 lastSsBeehive:{}
             }            
-            for (var index in data.data){
-                var beehive = data.data[index];
+            for (var index in data){
+                var beehive = data[index];
                 if (beehive.teamName === teamName && beehive.siteName === siteName){
                     lastBeehives.lastBeehive = beehive;
-                    if (beehive.feedPp){
+                    if (parseInt(beehive.feedPp)){
                         lastBeehives.lastPpBeehive = beehive;
                     }
-                    if (beehive.feedSs){
+                    if (parseInt(beehive.feedSs)){
                         lastBeehives.lastSsBeehive = beehive;
                     }
                 }

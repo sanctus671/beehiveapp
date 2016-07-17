@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.taylorhamling.behiveapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
-  <name>Behive App</name>
+<widget id="com.taylorhamling.beehiveapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+  <name>Beehive Tracker</name>
   <description>
-       Behive app for tracking behives
+       Beehive app for tracking behives
     </description>
   <author email="taylor@taylorhamling.com" href="http://www.taylorhamling.com">
       Taylor Hamling
     </author>
   <content src="index.html"/>
   <access origin="*"/>
-  <preference name="phonegap-version" value="cli-5.2.0" /> 
+  <preference name="phonegap-version" value="cli-6.0.0" /> 
     <preference name="permissions" value="none" />
     <preference name="orientation" value="default" />
     <preference name="target-device" value="universal" />
@@ -26,9 +26,10 @@
     <preference name="android-installLocation" value="auto" />
 
 	<gap:plugin name="cordova-plugin-statusbar" source="npm"/>	
-	<gap:plugin name="ionic-plugin-keyboard" source="npm" version="1.0.8"/>	
+
+	<gap:plugin name="ionic-plugin-keyboard" source="npm"/>	
   
-  <gap:plugin name="cordova-plugin-file" source="npm"/>
+  <gap:plugin name="cordova-plugin-qrscanner" source="npm"/>
   
     <icon gap:platform="android" gap:qualifier="ldpi" src="resources/icon/android/ldpi.png" />
     <icon gap:platform="android" gap:qualifier="mdpi" src="resources/icon/android/mdpi.png" />
@@ -49,6 +50,7 @@
         <allow-intent href="market:*" />
     </platform>
     <platform name="ios">
+		<hook  type="before_build" src="plugins/cordova-plugin-qrscanner/scripts/swift-support.js" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
     </platform>
