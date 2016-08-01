@@ -162,7 +162,7 @@ angular.module('app.services', [])
             }            
             for (var index in data){
                 var beehive = data[index];
-                if (beehive.teamName === teamName && beehive.siteName === siteName){
+                if (/*beehive.teamName === teamName &&*/ beehive.siteName === siteName){
                     lastBeehives.lastBeehive = beehive;
                     if (parseInt(beehive.feedPp)){
                         lastBeehives.lastPpBeehive = beehive;
@@ -180,6 +180,27 @@ angular.module('app.services', [])
         
         return deferred.promise; 
 
+    }    
+    
+    this.getPersons = function(){
+        var deferred = $q.defer();  
+        $http.post(API_URL, {method:"getpersons"})    
+            .success(function(data) {
+                if (data.result === "success"){
+                    window.localStorage.persons = JSON.stringify(data.data);
+                    deferred.resolve(data.data);
+                }
+                else{
+                    var offlineData = window.localStorage.persons ? JSON.parse(window.localStorage.persons) : null;
+                    deferred.resolve(offlineData);
+                }
+            })
+            .error(function(data,status) {
+                var offlineData = window.localStorage.persons ? JSON.parse(window.localStorage.persons) : null;
+                deferred.resolve(offlineData);
+            });
+
+        return deferred.promise;         
     }    
     
     this.saveNotSubmittedBeehive = function(beehive){

@@ -27,10 +27,14 @@ angular.module('app.controllers', [])
         daysSinceLast2FeedsPp2:0,
         daysSinceVisited:0,
         gearNeeded:"",
+        person:"",
         submittedDate:""
     }
     $scope.teamSites = [];
     $scope.teamSitesSelect = {teams:[],sites:[]};
+    
+    $scope.persons = [];
+    $scope.personsSelect = [];
     
     $scope.blankBehive = angular.copy($scope.beehive);
     
@@ -39,13 +43,22 @@ angular.module('app.controllers', [])
         $scope.teamSites = data;
         for (var index in $scope.teamSites){
             var teamSite = $scope.teamSites[index];
+            /*
             if ($scope.teamSitesSelect.teams.indexOf(teamSite["team"]) < 0){
                 $scope.teamSitesSelect.teams.push(teamSite["team"]);
             }
+            */
             if ($scope.teamSitesSelect.sites.indexOf(teamSite["site"]) < 0){
                 $scope.teamSitesSelect.sites.push(teamSite["site"]);
-            }            
+            }        
+            
         }
+        MainService.getPersons().then(function(data2){
+            $scope.persons = data2;
+            for (var index in $scope.persons){
+                $scope.personsSelect.push($scope.persons[index].person);
+            }
+        })
     });
     
     $scope.openScanQrCode = function(){
@@ -98,7 +111,7 @@ angular.module('app.controllers', [])
     $scope.checkQrCode = function(qrCode){
         for (var index in $scope.teamSites){
             var teamSite = $scope.teamSites[index];
-            if (teamSite.team === $scope.beehive.teamName && teamSite.site === $scope.beehive.siteName){
+            if (/*teamSite.team === $scope.beehive.teamName && */teamSite.site === $scope.beehive.siteName){
                 return teamSite.qrCode === qrCode;
             }
         }
@@ -237,10 +250,10 @@ angular.module('app.controllers', [])
 
 
     $scope.submitBeehive = function(){
-        if (!$scope.beehive.teamName || !$scope.beehive.siteName){
+        if (/*!$scope.beehive.teamName || */!$scope.beehive.siteName || !$scope.beehive.person /*|| !$scope.beehive.qrCode*/){
             $ionicPopup.alert({
             title: 'Error',
-            template: "Please enter a team name, site name and scan the valid QR code to submit this data",
+            template: "Please enter a the site name, scan the valid QR code, and select your name to submit this data",
             buttons:[
                 {text: "OK",
                 type:"button-energized"}

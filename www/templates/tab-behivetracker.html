@@ -5,12 +5,6 @@
         
         <div class="list entry-form">         
           <label class="item item-input item-select">
-            <span class="input-label">Team Name</span>
-            <select ng-model="beehive.teamName" name="teamName" ng-change="selectOption()">
-                <option ng-repeat="teamName in teamSitesSelect.teams">{{teamName}}</option>
-            </select>
-          </label>
-          <label class="item item-input item-select">
             <span class="input-label">Site Name</span>
             <select ng-model="beehive.siteName" name="siteName" ng-change="selectOption()">
                 <option ng-repeat="siteName in teamSitesSelect.sites">{{siteName}}</option>
@@ -133,12 +127,17 @@
         </label>          
             
 
-          <label class="item item-input item-stacked-label">
+          <label class="item item-input item-stacked-label form-seperator">
             <span class="input-label">Gear needed</span>
             <textarea name="gearNeeded" placeholder="Gear needed" ng-model="beehive.gearNeeded" rows="5"></textarea>
           </label>          
           
-          
+          <label class="item item-input item-select">
+            <span class="input-label">Person tracking</span>
+            <select ng-model="beehive.person" name="person">
+                <option ng-repeat="person in personsSelect">{{person}}</option>
+            </select>
+          </label>              
         </div>
        
 
