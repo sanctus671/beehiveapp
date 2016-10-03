@@ -89,6 +89,6 @@ angular.module('app', ['ionic', 'app.controllers', 'app.services', 'ionic-datepi
 })
 
 
-.constant('API_URL', 'http://websites.localhost/behiveapp/index.php?key=yWd8nfDUamVCyYmC')
+.constant('API_URL', 'http://www.beehivetracker.co.nz/index.php?key=yWd8nfDUamVCyYmC')
 
 ;
