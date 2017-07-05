@@ -1,0 +1,25 @@
+<ion-view view-title="History">
+  <ion-content>
+    <ion-list>
+        <ion-item>
+            <button class="button button-block button-energized" ng-click="doSync()">Sync with database</button>
+        </ion-item>
+      <ion-item class="item-icon-right" ng-repeat="beehive in beehives" href="#/tab/history/{{$index}}">
+        <h2>Data submitted on {{beehive.submittedDate}}</h2>
+        <p><strong>Team:</strong> {{beehive.teamName}} <strong>Site:</strong> {{beehive.siteName}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+      </ion-item>
+        
+        <ion-item ng-if="nsBeehives.length > 0">
+            <h3>Not yet submitted data</h3>
+        </ion-item>     
+      <ion-item class="item-icon-right" ng-repeat="beehive in nsBeehives" ui-sref="tab.history-detail({historyId: {{$index}}, notSubmitted:true})">
+        <h2>Data submitted on {{beehive.submittedDate}}</h2>
+        <p><strong>Team:</strong> {{beehive.teamName}} <strong>Site:</strong> {{beehive.siteName}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+      </ion-item>        
+    </ion-list>
+  </ion-content>
+</ion-view>

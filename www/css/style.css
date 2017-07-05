@@ -1,0 +1,47 @@
+.form-seperator{
+    border-bottom:3px solid black;
+}
+
+.number-input{
+    position: relative;
+}
+
+.number-input .icon{
+    position: absolute;
+    top: 25%;
+    z-index: 3;  
+    font-size:20px;
+    color:#ddd;
+}
+
+.number-input .icon.activated{
+ color:#444;   
+}
+
+
+
+.number-input .icon.ion-android-remove-circle{
+        left: 200px;
+        
+}
+
+@media screen and (min-width:1000px){
+    .number-input .icon.ion-android-remove-circle{
+     left:320px;   
+    }
+
+}
+
+.number-input .icon.ion-android-add-circle{
+        right: 5%;
+}
+
+.number-input input{
+    padding-left: 10%;
+    padding-right: 10%; 
+}
+    .number-input .input-label{
+     min-width:200px;   
+    }
+
+

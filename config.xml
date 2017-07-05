@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="com.taylorhamling.beehiveapp" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+  <name>Beehive Tracker</name>
+  <description>
+       Beehive app for tracking beehives
+    </description>
+  <author email="taylor@taylorhamling.com" href="http://www.taylorhamling.com">
+      Taylor Hamling
+    </author>
+  <content src="index.html"/>
+  <access origin="*"/>
+  <preference name="android-build-tool" value="gradle" />
+  <preference name="phonegap-version" value="cli-6.0.0" /> 
+    <preference name="permissions" value="none" />
+    <preference name="orientation" value="default" />
+    <preference name="target-device" value="universal" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="true" />
+    <preference name="prerendered-icon" value="true" />
+    <preference name="stay-in-webview" value="false" />
+    <preference name="ios-statusbarstyle" value="black-opaque" />
+    <preference name="detect-data-types" value="true" />
+    <preference name="exit-on-suspend" value="false" />
+	
+    <preference name="disable-cursor" value="false" />
+    <preference name="android-minSdkVersion" value="15" />
+    <preference name="android-installLocation" value="auto" />
+
+	<gap:plugin name="cordova-plugin-statusbar" source="npm"/>	
+
+	<gap:plugin name="ionic-plugin-keyboard" source="npm"/>	
+  
+  <gap:plugin name="phonegap-plugin-barcodescanner" source="npm"/>
+  
+    <icon gap:platform="android" gap:qualifier="ldpi" src="resources/icon/android/ldpi.png" />
+    <icon gap:platform="android" gap:qualifier="mdpi" src="resources/icon/android/mdpi.png" />
+    <icon gap:platform="android" gap:qualifier="hdpi" src="resources/icon/android/hdpi.png" />
+    <icon gap:platform="android" gap:qualifier="xhdpi" src="resources/icon/android/xhdpi.png" />
+	<icon gap:platform="android" gap:qualifier="xxhdpi" src="resources/icon/android/xxhdpi.png" />
+	<icon gap:platform="android" gap:qualifier="xxxhdpi" src="resources/icon/android/xxxhdpi.png" />  
+  
+    <access origin="*" />
+    <plugin name="cordova-plugin-whitelist" version="1" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-intent href="tel:*" />
+    <allow-intent href="sms:*" />
+    <allow-intent href="mailto:*" />
+    <allow-intent href="geo:*" />
+    <platform name="android">
+        <allow-intent href="market:*" />
+    </platform>
+    <platform name="ios">
+		<hook  type="before_build" src="plugins/cordova-plugin-qrscanner/scripts/swift-support.js" />
+        <allow-intent href="itms:*" />
+        <allow-intent href="itms-apps:*" />
+    </platform>
+
+    <engine name="android" spec="^4.0.0" />  
+  
+</widget>
