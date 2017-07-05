@@ -30,14 +30,7 @@
             </label>  
             <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'populationOfBees')"></i>
         </div>
-        <div class="number-input">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesWithDoubleBrood')"></i>
-            <label class="item item-input">
-              <span class="input-label">Hives with double brood</span>
-              <input min="0" type="number" name="hivesWithDoubleBrood" placeholder="Hives with double brood" ng-model="beehive.hivesWithDoubleBrood">
-            </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesWithDoubleBrood')"></i>
-        </div>
+
         <div class="number-input">  
             <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'weakHives')"></i>
             <label class="item item-input">
@@ -45,71 +38,59 @@
               <input min="0" type="number" name="weakHives" placeholder="Weak Hives" ng-model="beehive.weakHives">
             </label>  
             <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'weakHives')"></i>
-        </div>
-        <div class="number-input form-seperator">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'broodTaken')"></i>
-            <label class="item item-input">
-              <span class="input-label">Brood Taken</span>
-              <input min="0" type="number" name="broodTaken" placeholder="Brood Taken" ng-model="beehive.broodTaken">
-            </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'broodTaken')"></i>
-        </div>  
-            
-            
-            
-            
-            
-        <div class="number-input">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesWith1Super')"></i>
-            <label class="item item-input">
-              <span class="input-label">Hives with 1 Super</span>
-              <input min="0" type="number" name="hivesWith1Super" placeholder="Hives with 1 Super" ng-model="beehive.hivesWith1Super">
-            </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesWith1Super')"></i>
-        </div>
-        <div class="number-input">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesWith2Supers')"></i>
-            <label class="item item-input">
-              <span class="input-label">Hives with 2 Super</span>
-              <input min="0" type="number" name="hivesWith2Supers" placeholder="Hives with 2 Super" ng-model="beehive.hivesWith2Supers">
-            </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesWith2Supers')"></i>
-        </div>
-        <div class="number-input">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesWith3Supers')"></i>
-            <label class="item item-input">
-              <span class="input-label">Hives with 3 Super</span>
-              <input min="0" type="number" name="hivesWith3Supers" placeholder="Hives with 3 Super" ng-model="beehive.hivesWith3Supers">
-            </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesWith3Supers')"></i>
-        </div>
-        <div class="number-input form-seperator">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesWith4Supers')"></i>
-            <label class="item item-input">
-              <span class="input-label">Hives with 4 Super</span>
-              <input min="0" type="number" name="hivesWith4Supers" placeholder="Hives with 4 Super" ng-model="beehive.hivesWith4Supers">
-            </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesWith4Supers')"></i>
-        </div>
-            
+        </div> 
 
-        <label class="item item-input">
-          <span class="input-label">Total number of supers</span>
-          <input min="0" type="number" name="totalNumberOfSupers" placeholder="Total number of supers" ng-model="beehive.totalNumberOfSupers">
-        </label>  
-        
+        <div class="number-input">  
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'strongHives')"></i>
+            <label class="item item-input">
+              <span class="input-label">Strong Hives</span>
+              <input min="0" type="number" name="strongHives" placeholder="Strong Hives" ng-model="beehive.strongHives">
+            </label>  
+            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'strongHives')"></i>
+        </div> 
+            
+        <div class="number-input">  
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesStrength')"></i>
+            <label class="item item-input">
+              <span class="input-label">Strength (Rating 1-5)</span>
+              <input min="1" max="5" type="number" name="hivesStrength" placeholder="Weak Hives" ng-model="beehive.hivesStrength">
+            </label>  
+            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesStrength')"></i>
+        </div>             
+
+        <div class="number-input">  
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'deadouts')"></i>
+            <label class="item item-input">
+              <span class="input-label">Deadouts</span>
+              <input min="0" max="5" type="number" name="deadouts" placeholder="Deadouts" ng-model="beehive.deadouts">
+            </label>  
+            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'deadouts')"></i>
+        </div>             
+
+        <div class="number-input  form-seperator">  
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'totalNumberOfSupers')"></i>            
+            <label class="item item-input">
+              <span class="input-label">Total number of supers</span>
+              <input min="0" type="number" name="totalNumberOfSupers" placeholder="Total number of supers" ng-model="beehive.totalNumberOfSupers">
+            </label>  
+            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'totalNumberOfSupers')"></i>
+        </div>      
+            
+            
+            
         <ion-checkbox class="checkbox-energized" ng-model="beehive.varroaIn" name="varroaIn" ng-change="setFieldDate(beehive.varroaIn, beehive, 'varroaInDate')">Varroa in</ion-checkbox>  
-        <ion-checkbox class="checkbox-energized"  ng-model="beehive.feedSs" name="feedSs" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">Feed S/S</ion-checkbox>    
+        
+        <ion-checkbox class="checkbox-energized"  ng-model="beehive.feedSs" name="feedSs" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">Fed Surgar Syrup</ion-checkbox>    
         <label class="item item-input">
           <span class="input-label">Days since last feed</span>
           <input min="0" type="number" name="daysSinceLast2FeedsSs1" placeholder="Days since last 2 feeds: first" ng-model="beehive.daysSinceLast2FeedsSs1">
         </label>  
         <label class="item item-input">
-          <span class="input-label">Days since that feed</span>
+          <span class="input-label">Days since last feed x2</span>
           <input min="0" type="number" name="daysSinceLast2FeedsSs2" placeholder="Days since last 2 feeds: second" ng-model="beehive.daysSinceLast2FeedsSs2">
         </label>     
         
-        <ion-checkbox class="checkbox-energized" ng-model="beehive.feedPp" name="feedPp" ng-change="setFieldDate(beehive.feedPp, beehive, 'feedPpDate')">Feed P/P</ion-checkbox> 
+        <ion-checkbox class="checkbox-energized" ng-model="beehive.feedPp" name="feedPp" ng-change="setFieldDate(beehive.feedPp, beehive, 'feedPpDate')">Fed Protein Patty</ion-checkbox> 
             
              
         <label class="item item-input">
@@ -117,7 +98,7 @@
           <input min="0" type="number" name="daysSinceLast2FeedsPp1" placeholder="Days since last 2 feeds: first" ng-model="beehive.daysSinceLast2FeedsPp1">
         </label>  
         <label class="item item-input">
-          <span class="input-label">Days since that feed</span>
+          <span class="input-label">Days since last feed x2</span>
           <input min="0" type="number" name="daysSinceLast2FeedsPp2" placeholder="Days since last 2 feeds: second" ng-model="beehive.daysSinceLast2FeedsPp2">
         </label>  
         
@@ -127,17 +108,17 @@
         </label>          
             
 
-          <label class="item item-input item-stacked-label form-seperator">
+          <label class="item item-input item-stacked-label">
             <span class="input-label">Gear needed</span>
             <textarea name="gearNeeded" placeholder="Gear needed" ng-model="beehive.gearNeeded" rows="5"></textarea>
-          </label>          
-          
-          <label class="item item-input item-select">
-            <span class="input-label">Person tracking</span>
-            <select ng-model="beehive.person" name="person">
-                <option ng-repeat="person in personsSelect">{{person}}</option>
-            </select>
-          </label>              
+          </label>  
+
+          <label class="item item-input item-stacked-label">
+            <span class="input-label">Comments</span>
+            <textarea name="comments" placeholder="Comments" ng-model="beehive.comments" rows="5"></textarea>
+          </label> 
+        
+             
         </div>
        
 

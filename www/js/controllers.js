@@ -1,19 +1,16 @@
 angular.module('app.controllers', [])
 
-.controller('BehiveTrackerCtrl', function($scope,ionicTimePicker,ionicDatePicker, MainService, $ionicLoading, $ionicPopup, $timeout) {
+.controller('BehiveTrackerCtrl', function($scope,ionicTimePicker,ionicDatePicker, $rootScope, MainService, $ionicLoading, $ionicPopup, $timeout) {
     $scope.beehive = {
         teamName:"",
         siteName:"",
         qrCode:"",
         numberOfHives:0,
         populationOfBees:0,
-        hivesWithDoubleBrood:0,
         weakHives:0,
-        broodTaken:0,
-        hivesWith1Super:0,
-        hivesWith2Supers:0,
-        hivesWith3Supers:0,
-        hivesWith4Supers:0,
+        strongHives:0,
+        deadouts:0,
+        hivesStrength:5,
         totalNumberOfSupers:0,
         varroaIn:false,
         varroaInDate:"",
@@ -27,9 +24,10 @@ angular.module('app.controllers', [])
         daysSinceLast2FeedsPp2:0,
         daysSinceVisited:0,
         gearNeeded:"",
-        person:"",
+        comments:"",
         submittedDate:""
     }
+    $rootScope.beehiveKeys = angular.copy($scope.beehive);
     $scope.teamSites = [];
     $scope.teamSitesSelect = {teams:[],sites:[]};
     
@@ -111,7 +109,10 @@ angular.module('app.controllers', [])
     $scope.checkQrCode = function(qrCode){
         for (var index in $scope.teamSites){
             var teamSite = $scope.teamSites[index];
-            if (/*teamSite.team === $scope.beehive.teamName && */teamSite.site === $scope.beehive.siteName){
+            if (/*teamSite.team === $scope.beehive.teamName && teamSite.site === $scope.beehive.siteName*/ teamSite.qrCode === qrCode){
+                $scope.beehive.teamName = teamSite.team;
+                $scope.beehive.siteName = teamSite.site;
+                $scope.selectOption();
                 return teamSite.qrCode === qrCode;
             }
         }
@@ -146,13 +147,13 @@ angular.module('app.controllers', [])
             if (lastBeehive.numberOfHives){
                 $scope.beehive.numberOfHives = parseInt(lastBeehive.numberOfHives); 
                 $scope.beehive.populationOfBees = parseInt(lastBeehive.populationOfBees); 
-                $scope.beehive.hivesWithDoubleBrood = parseInt(lastBeehive.hivesWithDoubleBrood); 
+                //$scope.beehive.hivesWithDoubleBrood = parseInt(lastBeehive.hivesWithDoubleBrood); 
                 $scope.beehive.weakHives = parseInt(lastBeehive.weakHives); 
-                $scope.beehive.broodTaken = parseInt(lastBeehive.broodTaken); 
-                $scope.beehive.hivesWith1Super = parseInt(lastBeehive.hivesWith1Super); 
-                $scope.beehive.hivesWith2Supers = parseInt(lastBeehive.hivesWith2Supers); 
-                $scope.beehive.hivesWith3Supers = parseInt(lastBeehive.hivesWith3Supers); 
-                $scope.beehive.hivesWith4Supers = parseInt(lastBeehive.hivesWith4Supers); 
+                //$scope.beehive.broodTaken = parseInt(lastBeehive.broodTaken); 
+                //$scope.beehive.hivesWith1Super = parseInt(lastBeehive.hivesWith1Super); 
+                //$scope.beehive.hivesWith2Supers = parseInt(lastBeehive.hivesWith2Supers); 
+                //$scope.beehive.hivesWith3Supers = parseInt(lastBeehive.hivesWith3Supers); 
+                //$scope.beehive.hivesWith4Supers = parseInt(lastBeehive.hivesWith4Supers); 
                 var dateTimeParts = lastBeehive.submittedDate.split(" ");
                 var dateParts = dateTimeParts[0].split("/");                
                 $scope.beehive.daysSinceVisited = $scope.getDaysSince(new Date(dateParts[1] + "-" + dateParts[0] + "-" + dateParts[2]));
@@ -181,7 +182,7 @@ angular.module('app.controllers', [])
     }
     
     $scope.$watch('beehive', function() {
-        $scope.beehive.totalNumberOfSupers = $scope.beehive.hivesWith1Super + ($scope.beehive.hivesWith2Supers*2) + ($scope.beehive.hivesWith3Supers*3) + ($scope.beehive.hivesWith4Supers*4);
+        //$scope.beehive.totalNumberOfSupers = $scope.beehive.hivesWith1Super + ($scope.beehive.hivesWith2Supers*2) + ($scope.beehive.hivesWith3Supers*3) + ($scope.beehive.hivesWith4Supers*4);
 
     }, true);
     
@@ -253,7 +254,7 @@ angular.module('app.controllers', [])
         if (/*!$scope.beehive.teamName || */!$scope.beehive.siteName || !$scope.beehive.person /*|| !$scope.beehive.qrCode*/){
             $ionicPopup.alert({
             title: 'Error',
-            template: "Please enter a the site name, scan the valid QR code, and select your name to submit this data",
+            template: "Scan the site QR code to submit this data",
             buttons:[
                 {text: "OK",
                 type:"button-energized"}
@@ -336,7 +337,8 @@ angular.module('app.controllers', [])
   }
 })
 
-.controller('HistoryDetailCtrl', function($scope, $stateParams, MainService) {
+.controller('HistoryDetailCtrl', function($scope, $stateParams, MainService, $rootScope) {
   $scope.beehive = MainService.getBeehive($stateParams.historyId, $stateParams.notSubmitted);
+  
   
 });

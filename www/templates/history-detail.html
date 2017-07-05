@@ -4,11 +4,11 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="Behive Details">
+<ion-view view-title="Beehive Details">
   <ion-content>
       <ion-list>
-          <ion-item ng-repeat="(label, row) in beehive" ng-if="label !== 'qrCode'">
-              <strong>{{label}}:</strong> {{row}}
+          <ion-item ng-repeat="(label, row) in beehiveKeys" ng-if="label !== 'qrCode'">
+              <strong>{{label}}:</strong> {{beehive[label]}}
           </ion-item>
           
       </ion-list>
