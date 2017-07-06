@@ -251,7 +251,13 @@ angular.module('app.controllers', [])
 
 
     $scope.submitBeehive = function(){
-        if (/*!$scope.beehive.teamName || */!$scope.beehive.siteName || !$scope.beehive.person /*|| !$scope.beehive.qrCode*/){
+        var teamSite = {};
+        for (var index in $scope.teamSites){
+            if ($scope.teamSites[index] === $scope.beehive.teamName){
+                teamSite = $scope.teamSites[index];
+            }
+        }        
+        if (teamSite.qrCode !== !$scope.beehive.qrCode){
             $ionicPopup.alert({
             title: 'Error',
             template: "Scan the site QR code to submit this data",
