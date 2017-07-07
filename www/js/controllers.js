@@ -256,7 +256,8 @@ angular.module('app.controllers', [])
             if ($scope.teamSites[index].site === $scope.beehive.siteName){
                 teamSite = $scope.teamSites[index];
             }
-        }        
+        }   
+        console.log(teamSite);console.log($scope.beehive);return;
         if (teamSite.qrCode !== !$scope.beehive.qrCode){
             $ionicPopup.alert({
             title: 'Error',
