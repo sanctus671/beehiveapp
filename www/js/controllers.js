@@ -257,8 +257,7 @@ angular.module('app.controllers', [])
                 teamSite = $scope.teamSites[index];
             }
         }   
-        console.log(teamSite);console.log($scope.beehive);return;
-        if (teamSite.qrCode !== !$scope.beehive.qrCode){
+        if (teamSite.qrCode !== $scope.beehive.qrCode){
             $ionicPopup.alert({
             title: 'Error',
             template: "Scan the site QR code to submit this data",
