@@ -253,7 +253,7 @@ angular.module('app.controllers', [])
     $scope.submitBeehive = function(){
         var teamSite = {};
         for (var index in $scope.teamSites){
-            if ($scope.teamSites[index].site === $scope.beehive.teamName){
+            if ($scope.teamSites[index].site === $scope.beehive.siteName){
                 teamSite = $scope.teamSites[index];
             }
         }        
