@@ -10,7 +10,8 @@ angular.module('app.controllers', [])
         weakHives:0,
         strongHives:0,
         deadouts:0,
-        hivesStrength:5,
+        averageBrood:1,
+        framesBroodTaken:0,
         totalNumberOfSupers:0,
         varroaIn:false,
         varroaInDate:"",
@@ -125,6 +126,7 @@ angular.module('app.controllers', [])
     }
     
     $scope.setFieldDate = function(set, object,key){
+        console.log($scope.beehive);
         if (set){
             var date = new Date();
             var ampm = date.getUTCHours() < 12 ? "am" : "pm";
@@ -149,6 +151,7 @@ angular.module('app.controllers', [])
                 $scope.beehive.populationOfBees = parseInt(lastBeehive.populationOfBees); 
                 //$scope.beehive.hivesWithDoubleBrood = parseInt(lastBeehive.hivesWithDoubleBrood); 
                 $scope.beehive.weakHives = parseInt(lastBeehive.weakHives); 
+                $scope.beehive.strongHives = parseInt(lastBeehive.strongHives); 
                 //$scope.beehive.broodTaken = parseInt(lastBeehive.broodTaken); 
                 //$scope.beehive.hivesWith1Super = parseInt(lastBeehive.hivesWith1Super); 
                 //$scope.beehive.hivesWith2Supers = parseInt(lastBeehive.hivesWith2Supers); 

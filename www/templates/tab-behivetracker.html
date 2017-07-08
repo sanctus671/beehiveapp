@@ -50,19 +50,28 @@
         </div> 
             
         <div class="number-input">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'hivesStrength')"></i>
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'averageBrood')"></i>
             <label class="item item-input">
-              <span class="input-label">Strength (Rating 1-5)</span>
-              <input min="1" max="5" type="number" name="hivesStrength" placeholder="Weak Hives" ng-model="beehive.hivesStrength">
+              <span class="input-label">Avg amount of brood</span>
+              <input min="1" max="8" type="number" name="averageBrood" placeholder="Avg Amount Of Brood" ng-model="beehive.averageBrood">
             </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'hivesStrength')"></i>
-        </div>             
+            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'averageBrood')"></i>
+        </div>     
+            
+        <div class="number-input">  
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'framesBroodTaken')"></i>
+            <label class="item item-input">
+              <span class="input-label">Frames of brood taken</span>
+              <input min="0" type="number" name="framesBroodTaken" placeholder="Frames of brood taken" ng-model="beehive.framesBroodTaken">
+            </label>  
+            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'framesBroodTaken')"></i>
+        </div>              
 
         <div class="number-input">  
             <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'deadouts')"></i>
             <label class="item item-input">
               <span class="input-label">Deadouts</span>
-              <input min="0" max="5" type="number" name="deadouts" placeholder="Deadouts" ng-model="beehive.deadouts">
+              <input min="0" type="number" name="deadouts" placeholder="Deadouts" ng-model="beehive.deadouts">
             </label>  
             <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'deadouts')"></i>
         </div>             
@@ -79,8 +88,14 @@
             
             
         <ion-checkbox class="checkbox-energized" ng-model="beehive.varroaIn" name="varroaIn" ng-change="setFieldDate(beehive.varroaIn, beehive, 'varroaInDate')">Varroa in</ion-checkbox>  
+
+        <ion-list>
+            <label class="item item-input">Fed Surgar Syrup:</label>             
+            <ion-radio ng-model="beehive.feedSs" ng-value="0.25" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">1/4</ion-radio>
+            <ion-radio ng-model="beehive.feedSs" ng-value="0.5" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">1/2</ion-radio>
+            <ion-radio ng-model="beehive.feedSs" ng-value="1" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">Full</ion-radio>
+        </ion-list>      
         
-        <ion-checkbox class="checkbox-energized"  ng-model="beehive.feedSs" name="feedSs" ng-change="setFieldDate(beehive.feedSs, beehive, 'feedSsDate')">Fed Surgar Syrup</ion-checkbox>    
         <label class="item item-input">
           <span class="input-label">Days since last feed</span>
           <input min="0" type="number" name="daysSinceLast2FeedsSs1" placeholder="Days since last 2 feeds: first" ng-model="beehive.daysSinceLast2FeedsSs1">
