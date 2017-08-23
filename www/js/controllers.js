@@ -13,6 +13,7 @@ angular.module('app.controllers', [])
         averageBrood:1,
         framesBroodTaken:0,
         totalNumberOfSupers:0,
+        manipulated:false,        
         varroaIn:false,
         varroaInDate:"",
         feedSs:false,
@@ -26,7 +27,8 @@ angular.module('app.controllers', [])
         daysSinceVisited:0,
         gearNeeded:"",
         comments:"",
-        submittedDate:""
+        submittedDate:"",
+        person:""
     }
     $rootScope.beehiveKeys = angular.copy($scope.beehive);
     $scope.teamSites = [];
@@ -129,9 +131,9 @@ angular.module('app.controllers', [])
         console.log($scope.beehive);
         if (set){
             var date = new Date();
-            var ampm = date.getUTCHours() < 12 ? "am" : "pm";
-            var min = date.getUTCMinutes() < 10 ? "0" + date.getUTCMinutes() : date.getUTCMinutes();
-            object[key] = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getUTCHours() + ":" + min + " " + ampm; 
+            var ampm = date.getHours() < 12 ? "am" : "pm";
+            var min = date.getHours() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+            object[key] = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() + " " + date.getHours() + ":" + min + " " + ampm; 
         }
         else{
             object[key] = null;

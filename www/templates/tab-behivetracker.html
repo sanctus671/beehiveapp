@@ -50,12 +50,12 @@
         </div> 
             
         <div class="number-input">  
-            <i class="icon ion-android-remove-circle" ng-click="addAmount(-1, beehive, 'averageBrood')"></i>
+            <i class="icon ion-android-remove-circle" ng-click="addAmount(-0.5, beehive, 'averageBrood')"></i>
             <label class="item item-input">
               <span class="input-label">Avg amount of brood</span>
               <input min="1" max="8" type="number" name="averageBrood" placeholder="Avg Amount Of Brood" ng-model="beehive.averageBrood">
             </label>  
-            <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'averageBrood')"></i>
+            <i class="icon ion-android-add-circle" ng-click="addAmount(0.5, beehive, 'averageBrood')"></i>
         </div>     
             
         <div class="number-input">  
@@ -85,6 +85,7 @@
             <i class="icon ion-android-add-circle" ng-click="addAmount(1, beehive, 'totalNumberOfSupers')"></i>
         </div>      
             
+        <ion-checkbox class="checkbox-energized" ng-model="beehive.manipulated" name="manipulated">Manipulated</ion-checkbox>  
             
             
         <ion-checkbox class="checkbox-energized" ng-model="beehive.varroaIn" name="varroaIn" ng-change="setFieldDate(beehive.varroaIn, beehive, 'varroaInDate')">Varroa in</ion-checkbox>  
@@ -127,6 +128,13 @@
             <span class="input-label">Gear needed</span>
             <textarea name="gearNeeded" placeholder="Gear needed" ng-model="beehive.gearNeeded" rows="5"></textarea>
           </label>  
+        
+        <label class="item item-input item-select">            
+            <span class="input-label">Person tracking</span>
+            <select ng-model="beehive.person" name="person">
+                <option ng-repeat="person in personsSelect">{{person}}</option>
+            </select>
+        </label>       
 
           <label class="item item-input item-stacked-label">
             <span class="input-label">Comments</span>
