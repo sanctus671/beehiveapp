@@ -128,7 +128,6 @@ angular.module('app.controllers', [])
     }
     
     $scope.setFieldDate = function(set, object,key){
-        console.log($scope.beehive);
         if (set){
             var date = new Date();
             var ampm = date.getHours() < 12 ? "am" : "pm";
@@ -147,13 +146,14 @@ angular.module('app.controllers', [])
             var lastBeehive = data.lastBeehive;
             var lastPpBeehive = data.lastPpBeehive;
             var lastSsBeehive = data.lastSsBeehive;
-            
+
             if (lastBeehive.numberOfHives){
                 $scope.beehive.numberOfHives = parseInt(lastBeehive.numberOfHives); 
                 $scope.beehive.populationOfBees = parseInt(lastBeehive.populationOfBees); 
                 //$scope.beehive.hivesWithDoubleBrood = parseInt(lastBeehive.hivesWithDoubleBrood); 
                 $scope.beehive.weakHives = parseInt(lastBeehive.weakHives); 
                 $scope.beehive.strongHives = parseInt(lastBeehive.strongHives); 
+
                 //$scope.beehive.broodTaken = parseInt(lastBeehive.broodTaken); 
                 //$scope.beehive.hivesWith1Super = parseInt(lastBeehive.hivesWith1Super); 
                 //$scope.beehive.hivesWith2Supers = parseInt(lastBeehive.hivesWith2Supers); 

@@ -62,11 +62,9 @@ angular.module('app.services', [])
     
     this.syncBeehives = function(){
         var beehives = MainService.getNotSubmittedBeehives();
-        console.log(beehives);
         if (beehives){
             var toSubmit = beehives.length;
             var interval = $interval(function(){
-                console.log(toSubmit);
                 if (toSubmit < 1){
                     MainService.removeNotSubmittedBeehives();
                     $interval.cancel(interval);
@@ -83,7 +81,6 @@ angular.module('app.services', [])
     
     this.saveBeehive = function(beehive){
         var beehives = MainService.getBeehives();
-        console.log(beehives);
         if (beehives){
             beehives.push(beehive);
             window.localStorage.beehives = JSON.stringify(beehives);
