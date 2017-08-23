@@ -113,7 +113,6 @@ angular.module('app.services', [])
     }; 
     
     
-    
     this.getBeehive = function(index, notSubmitted){
         var data = window.localStorage.beehives ? JSON.parse(window.localStorage.beehives) : null;
         if (notSubmitted){
