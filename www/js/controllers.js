@@ -330,7 +330,10 @@ angular.module('app.controllers', [])
     $scope.nsBeehives = [];
   $scope.$on('$ionicView.enter', function(){
        MainService.getBeehives().then(function(data){
-          $scope.beehives = data;
+          $scope.beehives = data.sort(function (a, b) {
+                return parseInt(b.id) - parseInt(a.id);
+            });;
+          
       });
       $scope.nsBeehives = MainService.getNotSubmittedBeehives();
   })
